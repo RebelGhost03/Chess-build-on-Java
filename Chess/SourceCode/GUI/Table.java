@@ -40,16 +40,18 @@ public class Table {
     private static String defaultPieceImagesPath = "Art/Pieces1/";
 
     private Board chessBoard;
-    private Board undoChessBoard;
-    private Move undoMove;
     private Tile startingTile;
     private Tile destinationTile;
     private Piece humanMovedPiece;
+    private List<Board> undoChessBoard;
+    private List<Move> undoMove;
 
     private boolean checkHighlightLegalsMove;
     private boolean exited;
 
     public Table() {
+        this.undoChessBoard = new ArrayList<>();
+        this.undoMove = new ArrayList<>();
         this.gameFrame = new JFrame("MainChess");
         this.gameFrame.setLayout(new BorderLayout());
         final JMenuBar tableMenuBar = generateMenuBar(); 
@@ -227,8 +229,8 @@ public class Table {
                         final Move move = Move.MoveFactory.createMove(chessBoard, startingTile.getTileCoordinate(), destinationTile.getTileCoordinate());
                         final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
 
-                        undoChessBoard = chessBoard;
-                        undoMove = move;
+                        undoChessBoard.add(chessBoard);
+                        undoMove.add(move);
 
                         if (transition.getMoveStatus().isDone()) {
                             chessBoard = transition.getTransitionBoard();
@@ -346,14 +348,19 @@ public class Table {
     }
 
     public void Undo() {
-            moveLog.removeMove(undoMove);
-            gameHistoryPanel.redo(undoChessBoard, moveLog);
+        if (undoChessBoard.size() == 1) gameHistoryPanel.redo(undoChessBoard.get(0), moveLog);
+        if (!undoChessBoard.isEmpty()) {
+            moveLog.removeMove(undoMove.get(undoMove.size() - 1));
+            gameHistoryPanel.redo(undoChessBoard.get(undoChessBoard.size() - 1), moveLog);
             capturedPiecePanel.redo(moveLog);
-            boardPanel.drawBoard(undoChessBoard);
-            chessBoard = undoChessBoard;
+            boardPanel.drawBoard(undoChessBoard.get(undoChessBoard.size() - 1));
+            chessBoard = undoChessBoard.get(undoChessBoard.size() - 1);
+            undoChessBoard.remove(undoChessBoard.size() - 1);
+            undoMove.remove(undoMove.size() - 1);
             startingTile = null;
             destinationTile = null;
             humanMovedPiece = null;
+        }
     }
 
     public static class MoveLog {
