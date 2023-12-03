@@ -9,7 +9,7 @@ import SourceCode.Engine.Board.Move;
 /*Construct an abstract piece */
 public abstract class Piece {
     
-    protected int piecePosition;
+    protected final int piecePosition;
     protected final Color pieceColor;
     protected final boolean isFirstMove;
     protected final PieceType pieceType;
@@ -55,10 +55,6 @@ public abstract class Piece {
     public int getPiecePostition() {
         return this.piecePosition;
     }
-
-    /*public void setPiecePosition(final int piecePosition1, final int piecePosition2) {
-        this.piecePosition = piecePosition1 * 8 + piecePosition2;
-    }*/
 
     /*Get this piece's color */
     public Color getPieceColor() {
