@@ -2,10 +2,8 @@ package SourceCode.Engine.Player;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-
-import com.google.common.collect.ImmutableList;
-
 import SourceCode.Engine.Color;
 import SourceCode.Engine.Board.Board;
 import SourceCode.Engine.Board.Move;
@@ -69,7 +67,7 @@ public class BlackPlayer extends Player {
             }
         }
 
-        return ImmutableList.copyOf(kingCastle);
+        return Collections.unmodifiableList(kingCastle);
     }
 
 }
