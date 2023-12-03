@@ -59,7 +59,6 @@ public class CapturedPiecePanel extends JPanel {
                   }
              } 
         }
-
         validate();
     }
 

@@ -151,42 +151,7 @@ public class Table {
 
             addMouseListener(new MouseListener() {
                 @Override
-                public void mouseClicked(final MouseEvent e) {
-                    /*if (SwingUtilities.isRightMouseButton(e)) {
-                        startingTile = null;
-                        destinationTile = null;
-                        humanMovedPiece = null;
-                    } else 
-                    if (SwingUtilities.isLeftMouseButton(e)) {
-                        if (startingTile == null) {
-                            startingTile = chessBoard.getTile(tileID);
-                            humanMovedPiece = startingTile.getPiece();
-                            if (humanMovedPiece == null) startingTile = null; 
-                        } else {
-                            destinationTile = chessBoard.getTile(tileID);
-                            //System.out.println(tileID);
-                            final Move move = Move.MoveFactory.createMove(chessBoard, startingTile.getTileCoordinate(), destinationTile.getTileCoordinate());
-                            final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
-
-                            if (transition.getMoveStatus().isDone()) {
-                                chessBoard = transition.getTransitionBoard();
-                                moveLog.addMove(move);
-                            }
-
-                            startingTile = null;
-                            destinationTile = null;
-                            humanMovedPiece = null;
-                        }
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                gameHistoryPanel.redo(chessBoard, moveLog);
-                                capturedPiecePanel.redo(moveLog);
-                                boardPanel.drawBoard(chessBoard);
-                            }
-                        });
-                   }*/
-                }
+                public void mouseClicked(final MouseEvent e) {}
 
                 @Override
                 public void mousePressed(final MouseEvent e) {
@@ -217,9 +182,7 @@ public class Table {
                 }
 
                 @Override   
-                public void mouseExited(final MouseEvent e) {
-                    
-                }
+                public void mouseExited(final MouseEvent e) {}
 
                 @Override
                 public void mouseReleased(final MouseEvent e) {
@@ -254,16 +217,13 @@ public class Table {
             });
 
             addMouseMotionListener(new MouseMotionListener() {
-
                 @Override
                 public void mouseDragged(final MouseEvent e) {
-                    
                     if (humanMovedPiece != null) {
                         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(defaultPieceImagesPath + 
                                                             humanMovedPiece.getPieceColor().toString().substring(0, 1) + 
                                                             humanMovedPiece.toString() + ".gif").getImage(),
                                                             new Point(0,0),"custom cursor"));
-                        
                         removePieceIcon(chessBoard);
                     }
                 }

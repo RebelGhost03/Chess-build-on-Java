@@ -46,7 +46,6 @@ public class GameHistoryPanel extends JPanel {
         if (moveLog.getMoves().size() > 0) {
             final Move lastMove = moveLog.getMoves().get(moveLog.size() - 1);
             final String moveText = lastMove.toString();
-
             if (lastMove.getMovedPiece().getPieceColor().isWhite()) {
                 this.model.setValueAt(moveText + calculateCheckAndCheckmateHash(board), currentRow, 0);
             } else if (lastMove.getMovedPiece().getPieceColor().isBlack()) {
@@ -58,7 +57,7 @@ public class GameHistoryPanel extends JPanel {
         vertical.setValue(vertical.getMaximum());
     }
 
-    private String calculateCheckAndCheckmateHash(final Board board) {
+    public String calculateCheckAndCheckmateHash(final Board board) {
         if (board.currentPlayer().isInCheckmate()) {
             return "#";
         } else if (board.currentPlayer().isInCheck()) {
@@ -137,12 +136,10 @@ public class GameHistoryPanel extends JPanel {
 
     private static class Row {
 
-
         private String whiteMoves;
         private String blackMoves;
 
-        Row() {
-        }
+        Row() {}
 
         public String getWhiteMoves() {
             return this.whiteMoves;
