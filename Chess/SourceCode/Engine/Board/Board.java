@@ -54,7 +54,7 @@ public class Board {
         P  P  P  P  P  P  P  P
         R  N  B  Q  K  B  N  R
     */
-    @Override
+    /*@Override
     public String toString() {
 
         final StringBuilder builder = new StringBuilder();
@@ -70,7 +70,7 @@ public class Board {
         }
 
         return builder.toString();
-    }
+    }*/
 
     public Iterable<Move> getAllLegalMoves() {
         List <Move> AllLegalMoves = new ArrayList<>();
@@ -101,6 +101,10 @@ public class Board {
 
     public Pawn getEnPassantPawn() {
         return this.enPassantPawn;
+    }
+
+    public Tile getTile(final int TileCoordinate) {
+        return gameBoard.get(TileCoordinate);
     }
 
     /*List of all the legal move a piece can takes */
@@ -188,10 +192,6 @@ public class Board {
         builder.setMoveMaker(Color.White);
         // build the board
         return builder.build();
-    }
-
-    public Tile getTile(final int TileCoordinate) {
-        return gameBoard.get(TileCoordinate);
     }
 
     public static class Builder {

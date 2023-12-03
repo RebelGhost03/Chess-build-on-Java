@@ -1,8 +1,8 @@
 package SourceCode.Engine.Board;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import com.google.common.collect.ImmutableMap;
 
 import SourceCode.Engine.Pieces.Piece;
 
@@ -22,7 +22,7 @@ public abstract class Tile {
             emptyTileMap.put(i, new EmptyTile(i));
         }
 
-        return ImmutableMap.copyOf(emptyTileMap);
+        return Collections.unmodifiableMap(emptyTileMap);
     }
 
     /*Give either a cached empty tile or an occupiled tile */
